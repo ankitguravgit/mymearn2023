@@ -56,7 +56,7 @@ app.use('/', express.static(path.join(__dirname, '/profilePictures')));
 // job1.start();
 // job2.start();
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 connectDb().then(() => {
     app.listen(PORT, () => {
