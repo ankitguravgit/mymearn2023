@@ -6,8 +6,8 @@ const connectDb = require('./utils/db');
 var session = require('express-session')
 const bodyParser = require('body-parser');
 const path = require("path");
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
+// const jwt = require('jsonwebtoken');
+// const passport = require('passport');
 const ejs = require('ejs');
 // const { job1, job2 } = require('./helper/cronJobs');
 
@@ -19,9 +19,11 @@ app.use("/api/payment/", paymentWebHookRoute);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: process.env.JWT_SECRET_KEY, }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({ secret: process.env.JWT_SECRET_KEY }));
+// app.use(passport.initialize());
+app.use(express.cookieParser(process.env.JWT_SECRET_KEY));
+app.use(express.session());
+// app.use(passport.session());
 app.use(cors());
 
 // Set the view engine to EJS
